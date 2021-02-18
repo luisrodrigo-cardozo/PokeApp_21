@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+
 import './App.css';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
+//importar componentes
+import Footer from './components/footer';
+import Header from './components/header';
+import PokeInicio from './pages/poke_inicio';
+import PokeApp from './pages/busca_poke';
+import Formulario from './pages/formulario';
+
 
 function App() {
+  const history = createBrowserHistory()
+  const [addPoke, setAddpoke] = useState([])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter history={history}>
+      <div className='App'>
+        <Header />
+        <Switch>
+          <Route exact={true} path='/' component={PokeInicio} />
+          <Route path='/busca_poke'><PokeApp addPoke={addPoke} setAddpoke={setAddpoke} /></Route>
+          <Route path='/formulario' > <Formulario addPoke={addPoke} /></Route>
+        </Switch>
+        {/* <Route exact={true} path='*' component={() => {
+          return (
+            <h1>Error 404 no encontrado</h1>
+          )
+        }} /> */}
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+
+
