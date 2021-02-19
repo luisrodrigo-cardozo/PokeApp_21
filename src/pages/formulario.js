@@ -47,6 +47,12 @@ const Formulario = ({ addPoke }) => {
                 console.log(error.text);
                 alert('Mensaje no enviado')
             });
+            setUser({
+                ...user,
+                nombre:'',
+                apellido:'',
+                email:''
+            })
     }
     return (
         <div className=' bg-secondary'>
