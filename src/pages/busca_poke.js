@@ -30,6 +30,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                             sprites: data.sprites.front_default,
                             abilities: data.abilities[0].ability.name
                         })
+
                         // console.log(data)
                     }))
                 .catch(error => swal({
@@ -69,17 +70,19 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
     }
 
     const borrarPoke = (id) => {
-        const poke = addPoke.filter(pok => pok.id !== id)
-        setAddpoke(poke)
+       
         swal({
             title: 'Eliminar',
-            text: ` estas seguro que deseas eliminar a ${pokeNombre}`,
+            text: 'Estas seguro que deseas eliminar el pokemon',
             icon: 'error',
-            buttons: ['No', 'Si']
+            buttons: ['No', 'Si'],
+            dangerMode:true
         }).then(respuesta => {
             if (respuesta) {
+                const poke = addPoke.filter(pok => pok.id !== id)
+                setAddpoke(poke)
                 swal({
-                    text: 'El archivo se ha borrado con exito',
+                    text: 'El pokemon ha sido eliminado con exito',
                     icon: 'success'
                 })
             }
@@ -87,17 +90,17 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
     }
 
     return (
-        <div className='bg-secondary'>
+        <div className='bg-secondary border'>
             <input type='text' placeholder='Ingrese Id o Nombre' onChange={(event) => {
                 setPokenombre(event.target.value)
             }} />
             <button className='btn btn-info' onClick={buscarPoke}>Buscar <i className="fas fa-search"></i></button>
             <div className='bg-dark '>
-                <div className='card-body border text-white'>
+                <div className='card-body border text-white '>
                     <h2>Name:{pokemon.name}</h2>
                     <h2>Species:{pokemon.species}</h2>
                     <h2>Type:{pokemon.types}</h2>
-                    <img src={pokemon.sprites} alt='image-pokemon' />
+                    <img src={pokemon.sprites} alt='pokemon'/>
                     <h2>{pokemon.abilities}</h2>
                     {pokemon.name !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
                     <Link to='/' className='btn btn-primary btn-lg'>Volver <i className="fas fa-arrow-circle-left"></i> </Link>
@@ -121,7 +124,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                     <tr key={i}>
                                         <th scope="row">{i + 1}</th>
                                         <td>{ii.name}</td>
-                                        <td><img src={ii.sprites.front_default} alt='image' /></td>
+                                        <td><img src={ii.sprites.front_default} alt='poke' /></td>
                                         <td>
                                             <button onClick={() => borrarPoke(ii.id)} className='btn btn-danger'>Eliminar <i className="fas fa-trash-alt"></i></button>
                                             {/*inicio modal*/}
@@ -131,7 +134,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                             <div className="modal fade" id={"modal" + i} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog">
                                                     <div className="modal-content">
-                                                        <div className="modal-header bg-success text-white">
+                                                        <div className="modal-header bg-dark text-white">
                                                             <h5 className="modal-title" id="exampleModalLabel">Info del Pokemon</h5>
                                                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -152,7 +155,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                                                 <h5>Height: {ii.height}</h5>
                                                             </div>
                                                         </div>
-                                                        <div className="modal-footer bg-success">
+                                                        <div className="modal-footer bg-danger">
                                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close <i className="fas fa-window-close"></i></button>
                                                         </div>
                                                     </div>
