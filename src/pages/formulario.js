@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import * as emailjs from 'emailjs-com';
+import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 //importar atomics
 import TextFields from '../atomics/textFields';
 import TextEmail from '../atomics/textEmail';
 
-const Formulario = ({ addPoke }) => {
+const Formulario = ({ addPoke, setAddpoke }) => {
+    const [invalid, setInvalid] = useState('')
+    let history = useHistory();
     console.log(addPoke)
     const [user, setUser] = useState({
         nombre: '',
@@ -27,73 +31,117 @@ const Formulario = ({ addPoke }) => {
             [name]: value
         })
     }
-    
 
     console.log(user)
     const enviarDatos = (e) => {
         e.preventDefault();
         if (user.nombre === '') {
-            alert('debera ingresar el nombre')
-        } else if (user.apellido === '') {
-            alert('debera ingresar el apellido ')
-        } else if (user.email === '') {
-            alert('debera ingresar el correo electronico')
-        }
-        emailjs.send('gmailMessage', 'template_selu6i4', user, 'user_BeJiEsll5uv1aFaetZRfG')
-            .then((result) => {
-                console.log(result.text);
-                alert('Mensaje enviado')
-            }, (error) => {
-                console.log(error.text);
-                alert('Mensaje no enviado')
-            });
-            setUser({
-                ...user,
-                nombre:'',
-                apellido:'',
-                email:''
+            swal({
+                title: 'Atención',
+                text: 'debera ingresar el nombre',
+                icon: 'warning',
+                button: 'aceptar'
+            }).then(resp => {
+                if (resp) {
+                    setInvalid('')
+                }
             })
+            setInvalid('is-invalid')
+
+        } else if (user.apellido === '') {
+            swal({
+                title: 'Atención',
+                text: 'debera ingresar el apellido',
+                icon: 'warning',
+                button: 'aceptar'
+            })
+            setInvalid('is-invalid')
+        } else if (user.email === '') {
+            swal({
+                title: 'Atención',
+                text: 'debera ingresar el correo electronico',
+                icon: 'warning',
+                button: 'aceptar'
+            })
+                .then(resp => {
+                    if (resp) {
+                        setInvalid('')
+                    }
+                })
+            setInvalid('is-invalid')
+        } else {
+            setInvalid('')
+            emailjs.send('gmailMessage', 'template_selu6i4', user, 'user_BeJiEsll5uv1aFaetZRfG')
+                .then((result) => {
+                    console.log(result.text);
+                    swal({
+                        title: 'Enviado',
+                        text: 'Mensaje enviado con exito',
+                        icon: 'success',
+                        button: 'aceptar'
+                    }
+                    )
+                    history.push("/busca_poke");
+                    setAddpoke([])
+                    setUser({
+                        nombre: '',
+                        apellido: '',
+                        email: ''
+                    })
+                }, (error) => {
+                    console.log(error.text);
+                });
+        }
+
+
     }
     return (
-        <div className=' bg-secondary'>
-            <h1>Formulario</h1>
-            <form>
-                <div className='row border'>
+        <div className=' fondo-form'>
+            <h1 className='text-white'>Formulario</h1>
+            <form className='box'>
+                <div className='row '>
                     <div className='col-12'>
-                        <label className='font-weight-bold'>Nombre: </label>
+                        <label className='font-weight-bold text-white'>Nombre: </label>
                         <TextFields name='nombre'
-                         placeholder='Ingrese nombre' 
-                         value={user.nombre} 
-                         onChange={handler} />
-                        {/* <input name='nombre' type='text' placeholder='Ingrese nombre' value={user.nombre} onChange={handler} /> */}
+                            placeholder='Ingrese nombre'
+                            value={user.nombre}
+                            onChange={handler}
+                            className={`form-control  ${invalid}`}
+                        />
+                        {/* <input name='nombre' type='text' placeholder='Ingrese nombre' value={user.nombre} onChange={handler} className='form-control'/> */}
                     </div>
                     <div className='col-12'>
-                        <label className='font-weight-bold'>Apellido: </label>
+                        <label className='font-weight-bold text-white'>Apellido: </label>
                         <TextFields name='apellido'
-                         placeholder='Ingrese apellido' 
-                         value={user.apellido} 
-                         onChange={handler}/>
+                            placeholder='Ingrese apellido'
+                            value={user.apellido}
+                            onChange={handler}
+                            className={`form-control  ${invalid}`}
+                        />
+
                         {/* <input name='apellido' type='text' placeholder='Ingrese apellido' value={user.apellido} onChange={handler} /> */}
                     </div>
                     <div className='col-12'>
-                        <label className='font-weight-bold'>Correo: </label>
-                        <TextEmail name='email' 
-                        placeholder='ingrese email'
-                        value={user.email}
-                        onChange={handler}
-                         />
+                        <label className='font-weight-bold text-white'>Correo: </label>
+                        <TextEmail name='email'
+                            placeholder='ingrese email'
+                            value={user.email}
+                            onChange={handler}
+                            className={`form-control  ${invalid}`}
+                        />
                         {/* <input name='email' type='email' placeholder='Ingrese email' value={user.email} onChange={handler} /> */}
                     </div>
                     <div className='col-12'>
-                        <button  type='button' className='btn btn-success' onClick={enviarDatos}>Enviar <i className="fas fa-share-square"></i> </button>     
+                        <button type='button' className='btn btn-success' onClick={enviarDatos}>Enviar <i className="fas fa-share-square"></i> </button>
                     </div>
                 </div>
+                <div className='font-weight-bold text-white box2'>
+                    <h5>Nombre: {user.nombre}</h5>
+                    <h5>Apellido: {user.apellido}</h5>
+                    <h5>{user.email}</h5>
+                </div>
             </form>
-            <div className='col-12'>
-                <h5>Nombre:{user.nombre}</h5>
-                <h5>Apellido:{user.apellido}</h5>
-                <h5>{user.email}</h5>
-            </div>
+
         </div>
     )
 

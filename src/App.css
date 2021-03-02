@@ -1,13 +1,72 @@
 .App {
   text-align: center;
 }
-
-.fondo {
-  background-image: url('./images/fondo.jpg');
-  height: 30rem;
+.box {
+  width:320px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:rgba(74, 178, 247, 0.4);
+  
 }
 
+.fondo {
+  background-size: cover;
+  min-height: 100vh;
+  max-width: 100%;
+}
 
+@media (max-width:576px) {
+.fondo {
+  background-image: url('./images/Mobile.jpg');
+ }
+}
+@media (min-width:577px)and (max-width:767px) {
+  .fondo {
+    background-image: url('./images/entre\ mobile\ y\ tablet.jpg');
+  }
+}
+@media (min-width:768px)and (max-width:1023px) {
+  .fondo {
+    background-image: url('./images/tablet.jpg');
+  }
+}
+@media (min-width:1024px) {
+  .fondo {
+    background-image: url('./images/Escritorio.jpg');
+  }
+}
+
+.fondo-form {
+  background-size: cover;
+  min-height: 100vh;
+  max-width: 100%;
+}
+@media (max-width:576px) {
+  .fondo-form {
+    background-image: url('./images/mobile-f-c.png');
+  }
+}
+@media (min-width:577px) and (max-width:767px) {
+  .fondo-form {
+    background-image: url('./images/myt-form.jpg');
+  }
+}
+@media (min-width:768px) and (max-width:992px) {
+  .fondo-form {
+    background-image: url('./images/tablet-f.jpg');
+  }
+}
+@media (min-width:993px) and (max-width:1023px) {
+  .fondo-form {
+    background-image: url('./images/aesc-form.jpg');
+  }
+}
+@media (min-width:1024px) {
+  .fondo-form {
+    background-image: url('./images/escf.jpg');
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

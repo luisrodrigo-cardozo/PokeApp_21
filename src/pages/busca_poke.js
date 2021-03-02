@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
+
+
+
 
 
 const PokeApp = ({ addPoke, setAddpoke }) => {
@@ -28,10 +32,21 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                         })
                         // console.log(data)
                     }))
-                .catch(error => alert('no se encontro este pokemon'))
+                .catch(error => swal({
+                    title: 'No se encontro',
+                    text: `No se ha encontrado este pokemon ${pokeNombre}`,
+                    icon: 'warning',
+                    button: 'Aceptar'
+                }
+                ))
         }
         else {
-            alert('debe introducir el nombre o el id del pokemon')
+            swal({
+                title: 'Atención',
+                text: 'Debe introducir el nombre o el id del pokemon',
+                icon: 'info',
+                button: 'Aceptar'
+            })
         }
     }
 
@@ -44,48 +59,68 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                     variable => [data, ...variable]
                 )
             })
+        setPokemon({
+            name: '',
+            species: '',
+            types: '',
+            sprites: '',
+            abilities: ''
+        })
     }
 
     const borrarPoke = (id) => {
         const poke = addPoke.filter(pok => pok.id !== id)
         setAddpoke(poke)
+        swal({
+            title: 'Eliminar',
+            text: ` estas seguro que deseas eliminar a ${pokeNombre}`,
+            icon: 'error',
+            buttons: ['No', 'Si']
+        }).then(respuesta => {
+            if (respuesta) {
+                swal({
+                    text: 'El archivo se ha borrado con exito',
+                    icon: 'success'
+                })
+            }
+        })
     }
 
     return (
-        <div className='bg-danger'>
+        <div className='bg-secondary'>
             <input type='text' placeholder='Ingrese Id o Nombre' onChange={(event) => {
                 setPokenombre(event.target.value)
             }} />
             <button className='btn btn-info' onClick={buscarPoke}>Buscar <i className="fas fa-search"></i></button>
-            <div className='col-sm-12 ,card bg-secondary'>
-                <div className='card-body'>
+            <div className='bg-dark '>
+                <div className='card-body border text-white'>
                     <h2>Name:{pokemon.name}</h2>
                     <h2>Species:{pokemon.species}</h2>
                     <h2>Type:{pokemon.types}</h2>
                     <img src={pokemon.sprites} alt='image-pokemon' />
                     <h2>{pokemon.abilities}</h2>
-                    {pokeNombre !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
+                    {pokemon.name !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
                     <Link to='/' className='btn btn-primary btn-lg'>Volver <i className="fas fa-arrow-circle-left"></i> </Link>
                 </div>
             </div>
             {addPoke.length !== 0 ? (
-                <div className='bg-danger'>
+                <div className='bg-dark'>
                     <table className="table table-bordered">
                         <thead className="thead-dark">
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Images</th>
-                                <th>Buttons</th>
+                                <th>Button</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='text-white font-weight-bold'>
                             {addPoke.map((ii, i) => {
                                 console.log(ii)
                                 return (
                                     <tr key={i}>
                                         <th scope="row">{i + 1}</th>
-                                        <td className='font-weight-bold'>{ii.name}</td>
+                                        <td>{ii.name}</td>
                                         <td><img src={ii.sprites.front_default} alt='image' /></td>
                                         <td>
                                             <button onClick={() => borrarPoke(ii.id)} className='btn btn-danger'>Eliminar <i className="fas fa-trash-alt"></i></button>
@@ -96,7 +131,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                             <div className="modal fade" id={"modal" + i} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog">
                                                     <div className="modal-content">
-                                                        <div className="modal-header bg-danger text-white">
+                                                        <div className="modal-header bg-success text-white">
                                                             <h5 className="modal-title" id="exampleModalLabel">Info del Pokemon</h5>
                                                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -117,7 +152,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                                                 <h5>Height: {ii.height}</h5>
                                                             </div>
                                                         </div>
-                                                        <div className="modal-footer bg-danger">
+                                                        <div className="modal-footer bg-success">
                                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close <i className="fas fa-window-close"></i></button>
                                                         </div>
                                                     </div>

@@ -4,7 +4,8 @@ const TextEmail = ({
     name,
     value,
     placeholder,
-    onChange
+    onChange,
+    className
 }) => {
     return (
         <Fragment>
@@ -12,7 +13,8 @@ const TextEmail = ({
                 name={name}
                 value={value}
                 placeholder={placeholder}
-                onChange={onChange} />
+                onChange={onChange}
+                className={className} />
         </Fragment>
     )
 }

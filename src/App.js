@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
+
 //importar componentes
 import Footer from './components/footer';
 import Header from './components/header';
@@ -26,7 +27,7 @@ function App() {
         <Switch>
           <Route exact={true} path='/' component={PokeInicio} />
           <Route path='/busca_poke'><PokeApp addPoke={addPoke} setAddpoke={setAddpoke} /></Route>
-          <Route path='/formulario' > <Formulario addPoke={addPoke} /></Route>
+          <Route path='/formulario' > <Formulario addPoke={addPoke} setAddpoke={setAddpoke} /></Route>
         </Switch>
         {/* <Route exact={true} path='*' component={() => {
           return (
