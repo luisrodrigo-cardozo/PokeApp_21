@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import * as emailjs from 'emailjs-com';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
 import swal from 'sweetalert';
 //importar atomics
 import TextFields from '../atomics/textFields';
 import TextEmail from '../atomics/textEmail';
+// importar estilos
+import estilos_card from '../styles/styles-card';
 
 const Formulario = ({ addPoke, setAddpoke }) => {
     const [invalid, setInvalid] = useState('')
     let history = useHistory();
+    const {card, card_img, text} = estilos_card
     console.log(addPoke)
     const [user, setUser] = useState({
         nombre: '',
@@ -16,9 +19,10 @@ const Formulario = ({ addPoke, setAddpoke }) => {
         email: '',
         image: addPoke.map(poke => {
             return (
-                `<div>
-                     <img src="${poke.sprites.front_default}"/>
-                     <h3>${poke.name}</h3>
+                `<div style="${card}"> 
+                     <img src="${poke.sprites.front_default} "style="${card_img}"/>
+                     <h1 style="${text}">Name: ${poke.name}</h1>
+                     <h1 style="${text}">Abilities: ${poke.abilities[0].ability.name }</h1>
                 </div>`
             )
         })
@@ -38,9 +42,9 @@ const Formulario = ({ addPoke, setAddpoke }) => {
         if (user.nombre === '') {
             swal({
                 title: 'Atención',
-                text: 'debera ingresar el nombre',
+                text: 'Debe ingresar el nombre',
                 icon: 'warning',
-                button: 'aceptar'
+                button: 'Aceptar'
             }).then(resp => {
                 if (resp) {
                     setInvalid('')
@@ -51,17 +55,21 @@ const Formulario = ({ addPoke, setAddpoke }) => {
         } else if (user.apellido === '') {
             swal({
                 title: 'Atención',
-                text: 'debera ingresar el apellido',
+                text: 'Debe ingresar el apellido',
                 icon: 'warning',
-                button: 'aceptar'
+                button: 'Aceptar'
+            }).then(resp =>{
+                if(resp) {
+                    setInvalid('')
+                }
             })
             setInvalid('is-invalid')
         } else if (user.email === '') {
             swal({
                 title: 'Atención',
-                text: 'debera ingresar el correo electronico',
+                text: 'Debe ingresar el correo electronico',
                 icon: 'warning',
-                button: 'aceptar'
+                button: 'Aceptar'
             })
                 .then(resp => {
                     if (resp) {
@@ -78,7 +86,7 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                         title: 'Enviado',
                         text: 'Mensaje enviado con exito',
                         icon: 'success',
-                        button: 'aceptar'
+                        button: 'Aceptar'
                     }
                     )
                     history.push("/busca_poke");
@@ -106,7 +114,7 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                             placeholder='Ingrese nombre'
                             value={user.nombre}
                             onChange={handler}
-                            className={`form-control  ${invalid}`}
+                            className={`form-control  ${invalid}`} 
                         />
                         {/* <input name='nombre' type='text' placeholder='Ingrese nombre' value={user.nombre} onChange={handler} className='form-control'/> */}
                     </div>
@@ -133,9 +141,10 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                     </div>
                     <div className='col-12'>
                         <button type='button' className='btn btn-success' onClick={enviarDatos}>Enviar <i className="fas fa-share-square"></i> </button>
+                        <Link to='/busca_poke'className='btn btn-primary text-white'><i className="fas fa-arrow-circle-left"></i> Anterior</Link>
                     </div>
                 </div>
-                <div className='font-weight-bold text-white box2'>
+                <div className='font-weight-bold text-white'>
                     <h5>Nombre: {user.nombre}</h5>
                     <h5>Apellido: {user.apellido}</h5>
                     <h5>{user.email}</h5>
