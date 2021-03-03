@@ -36,6 +36,38 @@
     background-image: url('./images/Escritorio.jpg');
   }
 }
+  /* media queries error */
+.fondo-error {
+  background-size:cover;
+  min-height: 100vh;
+  max-width: 100%;
+}
+@media (max-width:576px){
+  .fondo-error {
+    background-image: url('./images/mobile-error.jpg');
+  }
+}
+@media (min-width:577px) and (max-width:767px) {
+  .fondo-error {
+    background-image: url('./images/entre\ mobile\ y\ tablet\ error.jpg');
+  }
+}
+@media (min-width:768px) and (max-width:992px) {
+  .fondo-error {
+    background-image: url('./images/tablet-error.jpg');
+  }
+}
+@media (min-width:993px) and (max-width:1023px) {
+  .fondo-error {
+    background-image: url('./images/aescr-error.jpg');
+  }
+}
+@media (min-width:1024px) {
+  .fondo-error {
+    background-image: url('./images/escritorio-error.jpg');
+  }
+}
+
 
 .fondo-form {
   background-size: cover;

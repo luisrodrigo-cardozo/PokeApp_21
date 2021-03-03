@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
-
-
-
-
 const PokeApp = ({ addPoke, setAddpoke }) => {
 
     const [pokeNombre, setPokenombre] = useState('')
@@ -30,7 +26,6 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                             sprites: data.sprites.front_default,
                             abilities: data.abilities[0].ability.name
                         })
-
                         // console.log(data)
                     }))
                 .catch(error => swal({
@@ -53,7 +48,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
 
     //agregar elementos al array
     const agregarPoke = () => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokeNombre}`)
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
             .then(resp => resp.json())
             .then(data => {
                 setAddpoke(
@@ -70,13 +65,13 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
     }
 
     const borrarPoke = (id) => {
-       
+
         swal({
             title: 'Eliminar',
-            text: 'Estas seguro que deseas eliminar el pokemon',
+            text: '¿Estas seguro que deseas eliminar el pokemon?',
             icon: 'error',
             buttons: ['No', 'Si'],
-            dangerMode:true
+            dangerMode: true
         }).then(respuesta => {
             if (respuesta) {
                 const poke = addPoke.filter(pok => pok.id !== id)
@@ -100,7 +95,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                     <h2>Name:{pokemon.name}</h2>
                     <h2>Species:{pokemon.species}</h2>
                     <h2>Type:{pokemon.types}</h2>
-                    <img src={pokemon.sprites} alt='pokemon'/>
+                    <img src={pokemon.sprites} alt='pokemon' />
                     <h2>{pokemon.abilities}</h2>
                     {pokemon.name !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
                     <Link to='/' className='btn btn-primary btn-lg'>Volver <i className="fas fa-arrow-circle-left"></i> </Link>

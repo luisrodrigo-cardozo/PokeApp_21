@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-
 const PokeInicio = () => {
     return (
         <div className='fondo'>

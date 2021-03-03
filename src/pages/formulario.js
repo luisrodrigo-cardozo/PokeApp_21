@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as emailjs from 'emailjs-com';
-import { useHistory, Link} from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import swal from 'sweetalert';
 //importar atomics
 import TextFields from '../atomics/textFields';
@@ -11,7 +11,7 @@ import estilos_card from '../styles/styles-card';
 const Formulario = ({ addPoke, setAddpoke }) => {
     const [invalid, setInvalid] = useState('')
     let history = useHistory();
-    const {card, card_img, text} = estilos_card
+    const { card, card_img, text } = estilos_card
     console.log(addPoke)
     const [user, setUser] = useState({
         nombre: '',
@@ -22,7 +22,7 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                 `<div style="${card}"> 
                      <img src="${poke.sprites.front_default} "style="${card_img}"/>
                      <h1 style="${text}">Name: ${poke.name}</h1>
-                     <h1 style="${text}">Abilities: ${poke.abilities[0].ability.name }</h1>
+                     <h1 style="${text}">Abilities: ${poke.abilities[0].ability.name}</h1>
                 </div>`
             )
         })
@@ -51,15 +51,14 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                 }
             })
             setInvalid('is-invalid')
-
         } else if (user.apellido === '') {
             swal({
                 title: 'Atención',
                 text: 'Debe ingresar el apellido',
                 icon: 'warning',
                 button: 'Aceptar'
-            }).then(resp =>{
-                if(resp) {
+            }).then(resp => {
+                if (resp) {
                     setInvalid('')
                 }
             })
@@ -98,10 +97,14 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                     })
                 }, (error) => {
                     console.log(error.text);
+                    swal({
+                        title: 'No enviado',
+                        text: 'Debe ingresar el email para poder enviar el mensaje',
+                        icon: 'error',
+                        button: 'Aceptar'
+                    })
                 });
         }
-
-
     }
     return (
         <div className=' fondo-form'>
@@ -114,7 +117,7 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                             placeholder='Ingrese nombre'
                             value={user.nombre}
                             onChange={handler}
-                            className={`form-control  ${invalid}`} 
+                            className={`form-control  ${invalid}`}
                         />
                         {/* <input name='nombre' type='text' placeholder='Ingrese nombre' value={user.nombre} onChange={handler} className='form-control'/> */}
                     </div>
@@ -126,7 +129,6 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                             onChange={handler}
                             className={`form-control  ${invalid}`}
                         />
-
                         {/* <input name='apellido' type='text' placeholder='Ingrese apellido' value={user.apellido} onChange={handler} /> */}
                     </div>
                     <div className='col-12'>
@@ -141,7 +143,7 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                     </div>
                     <div className='col-12'>
                         <button type='button' className='btn btn-success' onClick={enviarDatos}>Enviar <i className="fas fa-share-square"></i> </button>
-                        <Link to='/busca_poke'className='btn btn-primary text-white'><i className="fas fa-arrow-circle-left"></i> Anterior</Link>
+                        <Link to='/busca_poke' className='btn btn-primary text-white'><i className="fas fa-arrow-circle-left"></i> Anterior</Link>
                     </div>
                 </div>
                 <div className='font-weight-bold text-white'>
@@ -150,7 +152,6 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                     <h5>{user.email}</h5>
                 </div>
             </form>
-
         </div>
     )
 
