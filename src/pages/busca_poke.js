@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import logoPoke from '../images/logopokeapp.jpg'
 
 const PokeApp = ({ addPoke, setAddpoke }) => {
 
@@ -85,24 +86,31 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
     }
 
     return (
-        <div className='bg-secondary border'>
-            <input type='text' placeholder='Ingrese Id o Nombre' onChange={(event) => {
-                setPokenombre(event.target.value)
-            }} />
-            <button className='btn btn-info' onClick={buscarPoke}>Buscar <i className="fas fa-search"></i></button>
-            <div className='bg-dark '>
-                <div className='card-body border text-white '>
-                    <h2>Name:{pokemon.name}</h2>
-                    <h2>Species:{pokemon.species}</h2>
-                    <h2>Type:{pokemon.types}</h2>
-                    <img src={pokemon.sprites} alt='pokemon' />
-                    <h2>{pokemon.abilities}</h2>
-                    {pokemon.name !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
-                    <Link to='/' className='btn btn-primary btn-lg'>Volver <i className="fas fa-arrow-circle-left"></i> </Link>
+        <div className='bg-dark border'>
+            <div className='mt-3'>
+                <img src={logoPoke} alt='logo' />
+            </div>
+            <div className='mt-2'>
+                <input className='mr-2' type='text' placeholder='Ingrese Id o Nombre' onChange={(event) => {
+                    setPokenombre(event.target.value)
+                }} />
+                <button className='btn btn-info mb-2' onClick={buscarPoke}>Buscar <i className="fas fa-search"></i></button>
+            </div>
+            <div className='bg-dark container'>
+                <div className='row '>
+                    <div className='card-body border border-white mb-3 text-white col-sm-12'>
+                        <h2>Name:{pokemon.name}</h2>
+                        <h2>Species:{pokemon.species}</h2>
+                        <h2>Type:{pokemon.types}</h2>
+                        <img src={pokemon.sprites} alt='pokemon' />
+                        <h2>{pokemon.abilities}</h2>
+                        {pokemon.name !== '' ? (<button className='btn btn-success btn-lg' onClick={agregarPoke}>Agregar <i className="fas fa-user-plus"></i></button>) : (<></>)}
+                        <Link to='/' className='btn btn-primary btn-lg'>Volver <i className="fas fa-arrow-circle-left"></i> </Link>
+                    </div>
                 </div>
             </div>
             {addPoke.length !== 0 ? (
-                <div className='bg-dark'>
+                <div className='bg-dark col-sm-12'>
                     <table className="table table-bordered">
                         <thead className="thead-dark">
                             <tr>
@@ -112,20 +120,25 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                                 <th>Button</th>
                             </tr>
                         </thead>
-                        <tbody className='text-white font-weight-bold'>
+                        <tbody className='text-white font-weight-bold '>
                             {addPoke.map((ii, i) => {
-                                console.log(ii)
                                 return (
                                     <tr key={i}>
-                                        <th scope="row">{i + 1}</th>
-                                        <td>{ii.name}</td>
+                                        <th className='centrado-v' scope="row">{i + 1}</th>
+                                        <td className='centrado-v'>{ii.name}</td>
                                         <td><img src={ii.sprites.front_default} alt='poke' /></td>
                                         <td>
-                                            <button onClick={() => borrarPoke(ii.id)} className='btn btn-danger'>Eliminar <i className="fas fa-trash-alt"></i></button>
+                                            <div className='row'>
+                                                <div className='col-sm-12 mb-3 mt-2'>
+                                                    <button onClick={() => borrarPoke(ii.id)} className='btn btn-danger btn-sm'>Eliminar <i className="fas fa-trash-alt"></i></button>
+                                                </div>
+                                                <div className='col-sm-12'>
+                                                    <button type="button" className=" p-2 btn btn-primary btn-sm" data-toggle="modal" data-target={"#modal" + i}>
+                                                        Ver <i className="far fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                             {/*inicio modal*/}
-                                            <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#modal" + i}>
-                                                Ver <i className="far fa-eye"></i>
-                                            </button>
                                             <div className="modal fade" id={"modal" + i} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div className="modal-dialog">
                                                     <div className="modal-content">
@@ -163,9 +176,9 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
                             })}
                         </tbody>
                     </table>
-                    <Link to='/formulario' className='btn btn-success btn-lg text-white'>Confirmar <i className="fas fa-check-circle"></i></Link>
+                    <Link to='/formulario' className=' mb-3 btn btn-success btn-lg text-white'>Confirmar <i className="fas fa-check-circle"></i></Link>
                 </div>
-            ) : (<div>
+            ) : (<div className='bg-secondary'>
                 <h4>El carrito esta vacio </h4>
                 <i className="fas fa-shopping-cart"></i>
             </div>)}
