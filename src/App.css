@@ -12,65 +12,71 @@
 
 .fondo {
   background-size: cover;
+  background-position: center;
   min-height: 100vh;
   max-width: 100%;
 }
 
 @media (max-width:576px) {
 .fondo {
-  background-image: url('./images/Mobile.jpg');
+  background-image: url('./images/mob.jpg');
  }
 }
 @media (min-width:577px)and (max-width:767px) {
   .fondo {
-    background-image: url('./images/entre\ mobile\ y\ tablet.jpg');
+    background-image: url('./images/emyt.jpg');
   }
 }
 @media (min-width:768px)and (max-width:1023px) {
   .fondo {
-    background-image: url('./images/tablet.jpg');
+    background-image: url('./images/tab.jpg');
   }
 }
 @media (min-width:1024px) {
   .fondo {
-    background-image: url('./images/Escritorio.jpg');
+    background-image: url('./images/esc.jpg');
   }
 }
   /* media queries error */
 .fondo-error {
   background-size:cover;
+  background-position: center;
   min-height: 100vh;
   max-width: 100%;
 }
 @media (max-width:576px){
   .fondo-error {
-    background-image: url('./images/mobile-error.jpg');
+    background-image: url('./images/mobile-e-x.jpg');
+  }
+  .fondo-error h1 {
+    padding-top: 10rem;
   }
 }
 @media (min-width:577px) and (max-width:767px) {
   .fondo-error {
-    background-image: url('./images/entre\ mobile\ y\ tablet\ error.jpg');
+    background-image: url('./images/emyt-e-x.jpg');
   }
 }
 @media (min-width:768px) and (max-width:992px) {
   .fondo-error {
-    background-image: url('./images/tablet-error.jpg');
+    background-image: url('./images/tablet-e-x.jpg');
   }
 }
 @media (min-width:993px) and (max-width:1023px) {
   .fondo-error {
-    background-image: url('./images/aescr-error.jpg');
+    background-image: url('./images/aesc-e-x.jpg');
   }
 }
 @media (min-width:1024px) {
   .fondo-error {
-    background-image: url('./images/escritorio-error.jpg');
+    background-image: url('./images/escrit-e-x.jpg');
   }
 }
 
 
 .fondo-form {
   background-size: cover;
+  background-position: center;
   min-height: 100vh;
   max-width: 100%;
 }

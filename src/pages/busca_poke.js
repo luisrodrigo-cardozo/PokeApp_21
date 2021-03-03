@@ -39,7 +39,7 @@ const PokeApp = ({ addPoke, setAddpoke }) => {
         else {
             swal({
                 title: 'Atención',
-                text: 'Debe introducir el nombre o el id del pokemon',
+                text: 'Debe introducir el nombre en minuscula o el id del pokemon',
                 icon: 'info',
                 button: 'Aceptar'
             })

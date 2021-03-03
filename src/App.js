@@ -30,8 +30,8 @@ function App() {
           <Route path='/formulario' > <Formulario addPoke={addPoke} setAddpoke={setAddpoke} /></Route>
           <Route exact={true} path='*' component={() => {
             return (
-              <div className='fondo-error text-white'>
-                <h1>Error 404 no encontrado</h1>
+              <div className='fondo-error text-warning'>
+                <h1 className='font-weight-bold'>Error 404 no encontrado</h1>
               </div>
             )
           }} />
