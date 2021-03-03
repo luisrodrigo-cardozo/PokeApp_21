@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import * as emailjs from 'emailjs-com';
 import { useHistory, Link } from "react-router-dom";
 import swal from 'sweetalert';
+//importar imagen
+import logoPoke from '../images/logopoke2.jpg';
 //importar atomics
 import TextFields from '../atomics/textFields';
 import TextEmail from '../atomics/textEmail';
@@ -12,7 +14,6 @@ const Formulario = ({ addPoke, setAddpoke }) => {
     const [invalid, setInvalid] = useState('')
     let history = useHistory();
     const { card, card_img, text } = estilos_card
-    console.log(addPoke)
     const [user, setUser] = useState({
         nombre: '',
         apellido: '',
@@ -35,8 +36,6 @@ const Formulario = ({ addPoke, setAddpoke }) => {
             [name]: value
         })
     }
-
-    console.log(user)
     const enviarDatos = (e) => {
         e.preventDefault();
         if (user.nombre === '') {
@@ -80,7 +79,6 @@ const Formulario = ({ addPoke, setAddpoke }) => {
             setInvalid('')
             emailjs.send('gmailMessage', 'template_selu6i4', user, 'user_BeJiEsll5uv1aFaetZRfG')
                 .then((result) => {
-                    console.log(result.text);
                     swal({
                         title: 'Enviado',
                         text: 'Mensaje enviado con exito',
@@ -88,15 +86,15 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                         button: 'Aceptar'
                     }
                     )
-                    history.push("/busca_poke");
                     setAddpoke([])
                     setUser({
                         nombre: '',
                         apellido: '',
                         email: ''
                     })
+                    history.push("/busca_poke");
+
                 }, (error) => {
-                    console.log(error.text);
                     swal({
                         title: 'No enviado',
                         text: 'Debe ingresar el email para poder enviar el mensaje',
@@ -108,7 +106,10 @@ const Formulario = ({ addPoke, setAddpoke }) => {
     }
     return (
         <div className=' fondo-form'>
-            <h1 className='text-white'>Formulario</h1>
+            <div className='mb-2'>
+                <img className='mt-2' src={logoPoke} alt='logo2' />
+                <h1 className='font-weight-bold text-white'>Formulario</h1>
+            </div>
             <form className='box'>
                 <div className='row '>
                     <div className='col-12'>
@@ -141,15 +142,14 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                         />
                         {/* <input name='email' type='email' placeholder='Ingrese email' value={user.email} onChange={handler} /> */}
                     </div>
-                    <div className='col-12'>
+                </div>
+                <div className='row mt-3'>
+                    <div className='col-6'>
                         <button type='button' className='btn btn-success' onClick={enviarDatos}>Enviar <i className="fas fa-share-square"></i> </button>
+                    </div>
+                    <div className='col-6'>
                         <Link to='/busca_poke' className='btn btn-primary text-white'><i className="fas fa-arrow-circle-left"></i> Anterior</Link>
                     </div>
-                </div>
-                <div className='font-weight-bold text-white'>
-                    <h5>Nombre: {user.nombre}</h5>
-                    <h5>Apellido: {user.apellido}</h5>
-                    <h5>{user.email}</h5>
                 </div>
             </form>
         </div>
