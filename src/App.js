@@ -8,7 +8,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-
 //importar componentes
 import Footer from './components/footer';
 import Header from './components/header';

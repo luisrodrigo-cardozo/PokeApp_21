@@ -10,6 +10,10 @@
 
 }
 
+.centrado-v {
+  vertical-align: middle !important;
+}
+
 .fondo {
   background-size: cover;
   background-position: center;
