@@ -1,7 +1,7 @@
 # Pokeapp
 ![logo](/src/images/logopoke2.jpg)
 
-## Información del proyecto :information_source:
+## Información del proyecto 
 
 - En el proyecto Pokeapp debemos consumir la API de [PokeApi](https://pokeapi.co) utilizaremos la información que nos provee la misma.
 - Consiste en buscar, agregar el pokemon, llenar un formulario de contacto y enviarlo al mail del mismo.
