@@ -17,11 +17,11 @@ una vez descargado o clonado el repositorio debemos posicionarnos en la carpeta 
 
 ### Pagina de inicio 
 
-![inicio](https://ibb.co/G9rL86y/inicio.png)
+![inicio](https://i.ibb.co/nBKvYG9/inicio.png)
 
 ### Buscar y agregar pokemones
 
-![busqueda](https://ibb.co/mq9mTNc/busqueda.png)
+![busqueda](https://i.ibb.co/Nj9XCTy/busqueda.png)  
 
 - En esta sección se podrá buscar el pokemon ingresando nombre o id.
 - Al hacer click en el botón buscar nos trae la información del pokemon (imagen, nombre, tipo, especies) y se habilita el botón de agregar.
