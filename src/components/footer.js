@@ -6,7 +6,7 @@ const Footer = () => {
         <>
             <div>
                 <footer className="footer text-center bg-dark text-white border">
-                    <div className="container">
+                    <div className='container'>
                         <div className="row">
                             {/*Footer Location */}
                             <div className="col-lg-4 mb-5 mb-lg-0">

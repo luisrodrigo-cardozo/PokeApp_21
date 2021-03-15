@@ -81,7 +81,9 @@ const Formulario = ({ addPoke, setAddpoke }) => {
                 .then((result) => {
                     swal({
                         title: 'Enviado',
-                        text: 'Mensaje enviado con exito',
+                        text: `Mensaje enviado con exito
+                               recibiras en tu correo el pokemon 
+                               seleccionado `,
                         icon: 'success',
                         button: 'Aceptar'
                     }
